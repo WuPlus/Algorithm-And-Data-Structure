@@ -8,6 +8,7 @@
 package Leetcode;
 
 /**
+ * 
  * @author Wu
  */
 public class AddBinary {
