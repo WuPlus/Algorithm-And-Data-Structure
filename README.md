@@ -1,4 +1,4 @@
 # Leecode
 Leecode 
 
-My Code of Leecode Online Judge(https://oj.leetcode.com/)
+My Solutions(Only passed, not the best) for Leecode Online Judge(https://oj.leetcode.com/)
