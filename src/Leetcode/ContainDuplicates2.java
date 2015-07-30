@@ -12,18 +12,22 @@ import java.util.Map;
  * @author Wu
  */
 public class ContainDuplicates2 {
-    Map<Integer,Integer> map = new HashMap<Integer,Integer>();
     public boolean containsNearbyDuplicate(int[] nums, int k) {
+        Map<Integer,Integer> map = new HashMap<Integer,Integer>();
         if(k == 0) return false;
         int length = nums.length;
         for(int i=0;i<length;i++){
-            if(!map.containsKey(nums[i])&&map.size()<k){
-                map.put(nums[i],1);
-            }else if (!map.containsKey(nums[i])&&map.size() == k){
-                map.remove(nums[i-k]);
-                map.put(nums[i],1);
-            }else if(map.containsKey(nums[i]))
+            
+            if(map.containsKey(nums[i])){
                 return true;
+            }
+            
+            map.put(nums[i],1);
+            
+            if(i >= k){
+                map.remove(nums[i-k]);
+            }
+            
         }
         return false;
     }
