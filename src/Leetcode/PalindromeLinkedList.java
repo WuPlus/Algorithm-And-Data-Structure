@@ -28,7 +28,7 @@ public class PalindromeLinkedList {
         return count;
     }
     
-    public LinkedList isPalindromePerNode(ListNode head, ListNode symmetric, int index, int size){
+    public boolean isPalindromePerNode(ListNode head, ListNode symmetric, int index, int size){
         System.out.println(index +"-"+size);
         if(index == size/2 && size%2 == 1){
             symmetric.val = head.next.val;
