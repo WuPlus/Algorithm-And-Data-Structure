@@ -1,0 +1,135 @@
+/*
+ * Implement Tree Traversal including preorder, inorder, postorder and level traversal
+ * All the traversal methods are implemented in both recursive and iterative way
+ */
+package Basic;
+
+import Util.TreeNode;
+import java.util.*;
+
+/**
+ *
+ * @author Wu
+ */
+public class TreeTraversal {
+    // The following three methods are the recursive versions
+    public static void preorder(TreeNode root){
+        if(root == null) return;
+        System.out.print(root.cv + " ");
+        preorder(root.left);
+        preorder(root.right);
+    }
+    
+    public static void inorder(TreeNode root){
+        if(root == null) return;
+        inorder(root.left);
+        System.out.print(root.cv + " ");
+        inorder(root.right);
+    }
+    
+    public static void postorder(TreeNode root){
+        if(root == null) return;
+        postorder(root.left);
+        postorder(root.right);
+        System.out.print(root.cv + " ");
+    }
+    
+    //the following three methods are the iterative versions
+    public static void preorderIter(TreeNode root){
+        Stack<TreeNode> stack = new Stack();
+        TreeNode current = root;
+        
+        while(current != null || !stack.isEmpty()){
+            if(current != null){
+                System.out.print(current.cv + " ");
+                stack.push(current);
+                current = current.left;
+            }else{
+                current = stack.pop();
+                current = current.right;
+            }
+        }
+    }
+    
+    public static void inorderIter(TreeNode root){
+        Stack<TreeNode> stack = new Stack();
+        TreeNode current = root;
+        
+        while(current != null || !stack.isEmpty()){
+            if(current != null){
+                stack.push(current);
+                current = current.left;
+            }else{
+                current = stack.pop();
+                System.out.print(current.cv + " ");
+                current = current.right;
+            }
+        }
+    }
+    
+    //challenge
+    public static void postorderIter(TreeNode root){
+        Set<TreeNode> set = new HashSet();
+        Stack<TreeNode> stack = new Stack();
+        TreeNode current;
+        if(root != null)
+            stack.push(root);
+        else return;
+        
+        while(!stack.isEmpty()){
+            current = stack.peek();
+            if(set.contains(current)){
+                System.out.print(current.cv + " ");
+                stack.pop();
+                continue;
+            }
+            if(current.right != null){
+                stack.push(current.right);
+                set.add(current);
+            }
+            if(current.left != null){
+                stack.push(current.left);
+                set.add(current);
+            }
+            if(current.left == null && current.right == null){
+                System.out.print(current.cv + " ");
+                stack.pop();
+            }
+            
+        }
+    }
+    
+    
+    //for test only
+    public static void main(String[] args) {
+        TreeNode node1 = new TreeNode('a');
+        TreeNode node2 = new TreeNode('b');
+        TreeNode node3 = new TreeNode('c');
+        TreeNode node4 = new TreeNode('d');
+        TreeNode node5 = new TreeNode('e');
+        TreeNode node6 = new TreeNode('f');
+        TreeNode node7 = new TreeNode('g');
+        
+        node1.left = node2;
+        node1.right = node3;
+        node2.left = node4;
+        node2.right = node6;
+        node4.right = node5;
+        node6.left = node7;
+        
+        TreeTraversal.preorder(node1);
+        //output a b d e f g c 
+        System.out.println("");
+        TreeTraversal.inorder(node1);
+        //output d e b g f a c
+        System.out.println("");
+        TreeTraversal.postorder(node1);
+        //output e d g f b c a
+        System.out.println("");
+        TreeTraversal.preorderIter(node1);
+        System.out.println("");
+        TreeTraversal.inorderIter(node1);
+        System.out.println("");
+        TreeTraversal.postorderIter(node1);
+    }
+}

@@ -12,10 +12,15 @@ package Util;
 public class TreeNode {
 
     public int val;
+    public char cv;
     public TreeNode left;
     public TreeNode right;
 
-    TreeNode(int x) {
+    public TreeNode(int x) {
         val = x;
+    }
+    
+    public TreeNode(char c){
+        this.cv = c;
     }
 }
