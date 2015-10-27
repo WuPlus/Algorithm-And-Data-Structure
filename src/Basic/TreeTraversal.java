@@ -144,11 +144,13 @@ public class TreeTraversal {
         ArrayDeque<TreeNode> queue = new ArrayDeque();
         queue.add(root);
         while (!queue.isEmpty()) {
-            TreeNode node = queue.getFirst();
+            TreeNode node = queue.pollFirst();
             if (node != null) {
-                System.out.print(node.val);
-                queue.addLast(node.left);
-                queue.addLast(node.right);
+                System.out.print(node.cv + " ");
+                if(node.left != null)
+                    queue.addLast(node.left);
+                if(node.right != null)
+                    queue.addLast(node.right);
             }
         }
     }
@@ -197,5 +199,7 @@ public class TreeTraversal {
         TreeTraversal.inorderIter(node1);
         System.out.println("");
         TreeTraversal.postorderIter(node1);
+        System.out.println("");
+        TreeTraversal.levelOrder(node1);
     }
 }
