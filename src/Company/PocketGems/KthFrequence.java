@@ -13,57 +13,61 @@ import java.util.Map.Entry;
  * @author Wu
  */
 public class KthFrequence {
+
     /**
      * get the kth most frequent integer in array
+     *
      * @param input
      * @param k
-     * @return 
+     * @return
      */
-    static int kthFrequence(int [] input, int k){
-        Map<Integer,Integer> map = new HashMap<>();
-        for(int i:input){
-            if(!map.containsKey(i)){
+    static int kthFrequence(int[] input, int k) {
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int i : input) {
+            if (!map.containsKey(i)) {
                 map.put(i, 1);
-            }else{
-                map.put(i, map.get(i)+1);
+            } else {
+                map.put(i, map.get(i) + 1);
             }
         }
-        
-        Set<Entry<Integer,Integer>> set = map.entrySet();
-        Iterator<Entry<Integer,Integer>> i = set.iterator();
-        PriorityQueue<Entry<Integer,Integer>> pq = new PriorityQueue(new Comparator<Entry<Integer,Integer>>(){
+
+        Set<Entry<Integer, Integer>> set = map.entrySet();
+        Iterator<Entry<Integer, Integer>> i = set.iterator();
+        PriorityQueue<Entry<Integer, Integer>> pq = new PriorityQueue(new Comparator<Entry<Integer, Integer>>() {
 
             @Override
-            public int compare(Entry<Integer,Integer> o1, Entry<Integer,Integer> o2) {
+            public int compare(Entry<Integer, Integer> o1, Entry<Integer, Integer> o2) {
                 return o1.getValue().compareTo(o2.getValue());
             }
-       
+
         });
-        
-        while(i.hasNext()){
-            Entry<Integer,Integer> e = i.next();
-            if(pq.size() < k){
+
+        while (i.hasNext()) {
+            Entry<Integer, Integer> e = i.next();
+            if (pq.size() < k) {
                 pq.add(e);
-            }else{
-                if(pq.peek().getValue() < e.getValue()){
+            } else {
+                if (pq.peek().getValue() < e.getValue()) {
                     pq.poll();
                     pq.add(e);
                 }
             }
         }
-        
-        
-        if(pq.size() < k) return -1;
+
+        if (pq.size() < k) {
+            return -1;
+        }
         return pq.poll().getKey();
     }
-    
+
     /**
      * For test only
-     * @param args 
+     *
+     * @param args
      */
     public static void main(String[] args) {
-        int [] input = new int[]{1,1,2,3,4,5,6,6,6};
+        int[] input = new int[]{1, 1, 2, 3, 4, 5, 6, 6, 6};
         System.out.println(KthFrequence.kthFrequence(input, 2));
     }
-    
+
 }
