@@ -81,7 +81,7 @@ public class StringEncodeAndDecode {
      * @param args
      */
     public static void main(String[] args) {
-        String input = "abcdfffffffxyz";
+        String input = "abcdfffffffffffffffxyz";
         String encode = StringEncodeAndDecode.Encode(input);
         String decode = StringEncodeAndDecode.Decode(encode);
         System.out.println(input + "->" + encode + "->" + decode);
