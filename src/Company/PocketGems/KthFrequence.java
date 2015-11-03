@@ -31,8 +31,6 @@ public class KthFrequence {
             }
         }
 
-        Set<Entry<Integer, Integer>> set = map.entrySet();
-        Iterator<Entry<Integer, Integer>> i = set.iterator();
         PriorityQueue<Entry<Integer, Integer>> pq = new PriorityQueue(new Comparator<Entry<Integer, Integer>>() {
 
             @Override
@@ -41,9 +39,8 @@ public class KthFrequence {
             }
 
         });
-
-        while (i.hasNext()) {
-            Entry<Integer, Integer> e = i.next();
+        
+        for(Entry<Integer, Integer> e: map.entrySet()){
             if (pq.size() < k) {
                 pq.add(e);
             } else {
@@ -66,7 +63,7 @@ public class KthFrequence {
      * @param args
      */
     public static void main(String[] args) {
-        int[] input = new int[]{1, 1, 2, 3, 4, 5, 6, 6, 6};
+        int[] input = new int[]{1, 2, 2, 3, 4, 5, 6, 6, 6};
         System.out.println(KthFrequence.kthFrequence(input, 2));
     }
 
