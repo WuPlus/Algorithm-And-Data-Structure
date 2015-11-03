@@ -2,7 +2,7 @@
  * Implement Tree Traversal including preorder, inorder, postorder and level traversal
  * All the traversal methods are implemented in both recursive and iterative way
  */
-package Basic;
+package Basic.Tree;
 
 import Util.TreeNode;
 import java.util.*;
