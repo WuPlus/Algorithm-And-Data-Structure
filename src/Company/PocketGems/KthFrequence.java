@@ -57,5 +57,13 @@ public class KthFrequence {
         return pq.poll().getKey();
     }
     
+    /**
+     * For test only
+     * @param args 
+     */
+    public static void main(String[] args) {
+        int [] input = new int[]{1,1,2,3,4,5,6,6,6};
+        System.out.println(KthFrequence.kthFrequence(input, 2));
+    }
     
 }
