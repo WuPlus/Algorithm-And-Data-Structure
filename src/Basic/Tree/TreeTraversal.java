@@ -22,7 +22,7 @@ public class TreeTraversal {
         if (root == null) {
             return;
         }
-        System.out.print(root.cv + " ");
+        System.out.print(root.sv + " ");
         preorder(root.left);
         preorder(root.right);
     }

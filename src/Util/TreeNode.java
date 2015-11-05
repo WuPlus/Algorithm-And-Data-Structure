@@ -13,14 +13,19 @@ public class TreeNode {
 
     public int val;
     public char cv;
+    public String sv;
     public TreeNode left;
     public TreeNode right;
 
     public TreeNode(int x) {
         val = x;
     }
-    
-    public TreeNode(char c){
+
+    public TreeNode(char c) {
         this.cv = c;
+    }
+
+    public TreeNode(String s) {
+        this.sv = s;
     }
 }
