@@ -7,6 +7,8 @@ package Company.PocketGems;
 
 import Basic.Tree.TreeTraversal;
 import Util.TreeNode;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Stack;
 
 /**
@@ -14,6 +16,7 @@ import java.util.Stack;
  * @author Wu
  */
 public class TenaryToTree {
+
     /**
      * Transform a tenary expression to Tree Form
      * eg: a?b?c:d:e
@@ -25,46 +28,37 @@ public class TenaryToTree {
      * @param exp
      * @return 
      */
-    static TreeNode tenaryToTree(String exp) {
-        Stack<String> stack = new Stack();
-        String[] temp = exp.split("\\?");
-        int length = temp.length;
-        if (length < 1) {
-            return null; //illegal expression
+    static TreeNode tenaryToTree(String s) {
+        Map<Integer, TreeNode> map = new HashMap();
+        for (int i = 0; i < s.length(); i += 2) {
+            map.put(i, new TreeNode(s.charAt(i)+""));
         }
-        for (int i = 0; i < length - 1; i++) {
-            stack.push(temp[i]);
-        }
-        String[] temp2 = temp[length - 1].split(":");
-        int length2 = temp2.length;
-        if (length < 2) {
-            return null; //illegal expression
-        }
-        TreeNode left = new TreeNode(temp2[0]);
-        TreeNode right = new TreeNode(temp2[1]);
-        TreeNode top = new TreeNode(stack.pop());
-        top.left = left;
-        top.right = right;
-        for (int i = 2; i < length2; i++) {
-            right = new TreeNode(temp2[2]);
-            if (stack.isEmpty()) {
-                return null; //illegal expression
+        int i = 1, N = s.length();
+        Stack<TreeNode> stack = new Stack();
+        while (i < N) {
+            if (i < N && s.charAt(i) == '?') {
+                TreeNode p = map.get(i - 1);
+                if (i - 2 > -1 && !stack.isEmpty() && s.charAt(i - 2) != ':') {
+                    stack.peek().left = p;
+                }
+                stack.push(p);
+                i += 2;
+            } else {
+                TreeNode top = stack.pop();
+                TreeNode right = map.get(i + 1);
+                top.right = right;
+                if (i - 2 > -1 && s.charAt(i - 2) != ':') {
+                    TreeNode left = map.get(i - 1);
+                    top.left = left;
+                }
+                i += 2;
             }
-            TreeNode newTop = new TreeNode(stack.pop());
-            newTop.left = top;
-            newTop.right = right;
-            top = newTop;
         }
-        if (stack.isEmpty()) {
-            return top;
-        } else {
-            return null;//illegal expression
-        }
+        return map.get(0);
     }
 
     public static void main(String[] args) {
-        TreeNode t = TenaryToTree.tenaryToTree("a?b?c:d:e");
-        System.out.println(t == null);
-        //TreeTraversal.preorder(t);
+        TreeNode t = TenaryToTree.tenaryToTree("a?b?c:d:e?f:g");
+        TreeTraversal.preorder(t);
     }
 }

@@ -22,7 +22,7 @@ public class KthFrequence {
      * @return
      */
     static int kthFrequence(int[] input, int k) {
-        Map<Integer, Integer> map = new HashMap<>();
+        Map<Integer, Integer> map = new HashMap();
         for (int i : input) {
             if (!map.containsKey(i)) {
                 map.put(i, 1);
