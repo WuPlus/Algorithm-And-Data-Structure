@@ -28,4 +28,38 @@ public class TreeNode {
     public TreeNode(String s) {
         this.sv = s;
     }
+
+    public boolean remove(int value, TreeNode parent) {
+        if (value < this.val) {
+            if (left != null) {
+                return left.remove(value, this);
+            } else {
+                return false;
+            }
+        } else if (value > this.val) {
+            if (right != null) {
+                return right.remove(value, this);
+            } else {
+                return false;
+            }
+        } else {
+            if (left != null && right != null) {
+                this.val = right.minValue();
+                right.remove(this.val, this);
+            } else if (parent.left == this) {
+                parent.left = (left != null) ? left : right;
+            } else if (parent.right == this) {
+                parent.right = (left != null) ? left : right;
+            }
+            return true;
+        }
+    }
+
+    private int minValue() {
+        if (left == null) {
+            return val;
+        } else {
+            return left.minValue();
+        }
+    }
 }

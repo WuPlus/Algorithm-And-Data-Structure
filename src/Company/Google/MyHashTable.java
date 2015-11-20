@@ -5,7 +5,9 @@
  * and open the template in the editor.
  */
 package Company.Google;
+
 import java.util.*;
+
 /**
  *
  * @author Wu
@@ -34,12 +36,26 @@ public class MyHashTable<K, V> {
 
     public void put(K key, V value) {
         if (key == null) {
+
             throw new NullPointerException("null of key is not allowed");
         }
-        if (ary.get(key.hashCode() % size) == null) {
-            ary.add(key.hashCode() % size, new LinkedList<Entry<K, V>>());
+        int index = key.hashCode() % size;
+        if (ary.get(index) == null) {
+            ary.set(index, new LinkedList<Entry<K, V>>());
+            ary.get(index).add(new Entry<K, V>(key, value));
+        } else {
+            LinkedList<Entry<K, V>> list = ary.get(key.hashCode() % size);
+            Iterator<Entry<K, V>> iterator = list.iterator();
+            while (iterator.hasNext()) {
+                Entry<K, V> e = iterator.next();
+                if (e.key.equals(key)) {
+                    e.value = value;
+                    return;
+                }
+            }
+            list.add(new Entry<K, V>(key, value));
         }
-        ary.get(key.hashCode() % size).addFirst(new Entry<K, V>(key, value));
+
     }
 
     public V get(K key) {
@@ -60,8 +76,8 @@ public class MyHashTable<K, V> {
             return null;
         }
     }
-    
-    public void delete(V key, V value){
+
+    public void delete(V key, V value) {
         if (key == null) {
             throw new NullPointerException("null of key is not allowed");
         }
