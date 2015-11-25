@@ -5,8 +5,14 @@
  */
 package Company.Alarm;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 import java.util.Stack;
+import java.util.StringTokenizer;
 
 /**
  *
@@ -17,30 +23,54 @@ public class SuperStack {
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         int noCommands = in.nextInt();
-        
-        Stack<Integer> stack = new Stack();
+        in.nextLine();
+        Map<Integer, Integer> map = new HashMap();
+
+        List<Integer> stack = new ArrayList();
         for (int i = 0; i < noCommands; ++i) {
             String command = in.nextLine();
-            String [] split = command.split(" ");
+            StringTokenizer st = new StringTokenizer(command);
+            int size = stack.size();
 
-            if (split[0].equals("push")) {
-                int number = Integer.parseInt(split[1]);
-                stack.push(number);
-            } else if (split[0].equals("pop") && stack.size() > 0) {
-                stack.pop();
-            } else if (split[0].equals("inc")) {
-                int count = Integer.parseInt(split[1]);
-                int increment = Integer.parseInt(split[2]);
-                count = Math.min(stack.size(), count);
-                int size = stack.size();
-                
-                for (int j = 0; j < count; ++j) {
-                    stack.set(size-j-1, stack.get(size-j-1)+increment);
+            if (st.nextToken().charAt(0) == 'p') {
+                int number = Integer.parseInt(st.nextToken());
+                stack.add(0, number);
+
+            } else if (st.nextToken().equals("pop") && size > 0) {
+                if (map.containsKey(size)) {
+                    if (map.containsKey(size - 1)) {
+                        map.put(size - 1, map.get(size - 1) + map.get(size));
+                    }else{
+                        map.put(size-1, map.get(size));
+                    }
+                    map.remove(size);
                 }
+
+                stack.remove(0);
+            } else if (st.nextToken().equals("inc")) {
+                int count = Integer.parseInt(st.nextToken());
+                int increment = Integer.parseInt(st.nextToken());
+                count = Math.min(size, count);
+
+                if (map.containsKey(count)) {
+                    map.put(count, map.get(count) + increment);
+                }else{
+                    map.put(count, increment);
+                }
+//                for (int j = 0; j < count; ++j) {
+//                    stack.set(size - j - 1, stack.get(size - j - 1) + increment);
+//                }
             }
 
-            System.out.println(stack.peek());
+            if (stack.isEmpty()) {
+                System.out.println("EMPTY");
+            } else {
+                if (map.containsKey(stack.size())) {
+                    System.out.println(stack.get(0) + map.get(stack.size()));
+                } else {
+                    System.out.println(stack.get(0));
+                }
+            }
         }
     }
-
 }
