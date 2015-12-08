@@ -1,0 +1,134 @@
+<html lang="zh-CN">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="description" content="">
+		<meta name="author" content="Jiadong Wu">
+		<title>Invoice Management</title>
+		<!-- Bootstrap core CSS -->
+		<link href="css/lib/bootstrap.min.css" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="css/custom.css">
+	</head>
+	<body>
+		<div class="container">
+			<div class="header clearfix">
+				<nav>
+					<ul class="nav nav-pills pull-right">
+						<li role="presentation" class="active"><a href="#">Home</a></li>
+					</ul>
+				</nav>
+				<h3 class="text-muted">Invoice Management</h3>
+			</div>
+			<div class="row marketing">
+				<div class="col-lg-12">
+					<form>
+						<div class="row">
+							<div class="col-sm-5">
+								<div class="form-group">
+									<label for="cutomerName">Customer Name</label>
+									<input type="text" class="form-control" id="cutomerName" placeholder="Customer Name" data-bind="value: Invoice.customerName, hasFocus: Invoice.customerName.hasError">
+								</div>
+								<div class="form-group">
+									<label for="invoiceNumber">Invoice Number</label>
+									<input type="text" class="form-control" id="invoiceNumber" placeholder="Invoice Number" data-bind="value: Invoice.invoiceNumber, hasFocus: Invoice.invoiceNumber.hasError">
+								</div>
+								<div class="form-group">
+									<label for="cutomerName">Date</label>
+									<input type="text" data-provide="datepicker" class="form-control" id="invoiceDate" placeholder="Date" data-bind="value: Invoice.date, hasFocus: Invoice.date.hasError">
+								</div>
+							</div>
+							<div class="col-sm-7">
+							</div>
+						</div>
+						<br />
+						<div class="row">
+							<div class="col-lg-12">
+								<div class="panel panel-default">
+									<!-- Default panel contents -->
+									<div class="panel-heading">
+										<div class="row">
+											<div class="col-sm-4">
+												<h5>Product List</h5>
+											</div>
+											<div class="col-sm-6 col-sm-offset-2">
+												<input type="text" class="form-control" id="SearchTerm" placeholder="Search for..." data-bind="textInput: SearchTerm">
+											</div>
+										</div>
+									</div>
+									<div class="panel-body">
+										<div class="row">
+											<div class="col-sm-1"></div>
+											<div class="col-sm-3">Product Name</div>
+											<div class="col-sm-3 text-center">Quantity</div>
+											<div class="col-sm-3 text-center">Price</div>
+											<div class="col-sm-2 text-center">Total</div>
+										</div>
+									</div>
+									<!-- List group -->
+									<ul class="list-group">
+										<!-- ko foreach: FilteredProducts -->
+										<li class="list-group-item">
+											<div class="row">
+												<div class="col-sm-1">
+													<input type="checkbox" data-bind="checkedValue: $data, checked: $root.Invoice.productList">
+												</div>
+												<div class="col-sm-3" data-bind="text: productName"></div>
+												<div class="col-sm-3 text-center">
+													<div class="input-group">
+														<a class="input-group-addon" data-bind="click: $root.addQuantity">+</a>
+														<input type="text" class="form-control" data-bind="value: quantity">
+														<span class="input-group-addon" data-bind="click: $root.reduceQuantity">-</span>
+													</div>
+												</div>
+												<div class="col-sm-3 text-center">
+													<div class="input-group">
+														<span class="input-group-addon">$</span>
+														<input type="text" class="form-control" data-bind="value: price">
+													</div>
+												</div>
+												<div class="col-sm-2 text-center" data-bind="text: '$ ' + total()"></div>
+											</div>
+										</li>
+										<!-- /ko -->
+									</ul>
+								</div>
+							</div>
+						</div>
+						
+						<button type="button" class="btn btn-success btn-lg" data-bind="click: submitInvoice">Create</button>
+						<button type="button" class="btn btn-default btn-lg" data-bind="click: saveInvoice">Save</button>
+					</form>
+				</div>
+			</div>
+			<footer class="footer">
+				<p>&copy; Jiadong Wu</p>
+			</footer>
+		</div>
+		<div class="modal fade" id="confirmModal">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title" data-bind="text: ModalTitle"></h4>
+					</div>
+					<div class="modal-body">
+						<p data-bind="text: ModalBody"></p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+		<script type="text/javascript" src="JS/lib/jquery-2.1.4.min.js"></script>
+		<script src="JS/lib/bootstrap.min.js"></script>
+		<script type='text/javascript' src='JS/lib/knockout-3.4.0.js'></script>
+		<script type="text/javascript" src="JS/lib/bootstrap-datepicker.js"></script>
+		<script type="text/javascript" src = 'JS/main.js'></script>
+		<script type="text/javascript">
+			ko.applyBindings(new MyModel());
+		</script>
+	</body>
+</html>
