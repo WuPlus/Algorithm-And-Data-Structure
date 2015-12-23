@@ -9,7 +9,7 @@ package LeetCode_Round2;
  *
  * @author Wu
  */
-public class Solution66 {
+public class Solution066 {
 
     public int[] plusOne(int[] digits) {
         int len = digits.length;

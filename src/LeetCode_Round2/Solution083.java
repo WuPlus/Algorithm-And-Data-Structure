@@ -9,7 +9,7 @@ package LeetCode_Round2;
  *
  * @author Wu
  */
-public class Solution83 {
+public class Solution083 {
 
     public ListNode deleteDuplicates(ListNode head) {
         if (head == null) {

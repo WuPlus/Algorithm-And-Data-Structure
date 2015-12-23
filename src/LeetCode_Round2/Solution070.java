@@ -9,7 +9,7 @@ package LeetCode_Round2;
  *
  * @author Wu
  */
-public class Solution70 {
+public class Solution070 {
 
     public int climbStairs(int n) {
         if (n == 0 || n == 1) {
