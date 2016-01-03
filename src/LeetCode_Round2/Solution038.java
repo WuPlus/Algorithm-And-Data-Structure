@@ -36,11 +36,4 @@ public class Solution038 {
         }
         return current;
     }
-    
-    public static void main(String[] args) {
-        Solution038 s = new Solution038();
-        for (int i = 1; i < 5; i++) {
-            System.out.println(s.countAndSay(i));
-        }
-    }
 }
