@@ -5,8 +5,7 @@
  */
 package Company.LiveRamp;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  *
@@ -24,16 +23,16 @@ public class FrogJump {
      */
     public static int solution(int[] A, int X, int D) {
         int totalTime = A.length;
-        Map<Integer, Integer> route = new HashMap();
+        Set<Integer> route = new HashSet();
         for (int i = 1; i <= D; i++) {
-            route.put(i, 1);
+            route.add(i);
         }
         for (int i = 0; i < totalTime; i++) {
             //color the route
             for (int j = 1; j <= D; j++) {
                 int temp = A[i] + j;
                 if (temp <= X) {
-                    route.put(temp, 1);
+                    route.add(temp);
                 }
             }
             //check if all route has been colored

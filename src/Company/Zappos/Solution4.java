@@ -9,6 +9,8 @@ package Company.Zappos;
  */
 public class Solution4 {
 
+
+    
     static String isitpossible(int a, int b, int c, int d) {
         while (c > a || d > b) {
             if (c == d) {
