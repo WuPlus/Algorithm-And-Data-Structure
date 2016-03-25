@@ -2,10 +2,11 @@
 src/LeetCode
 
 My Solutions(Only accepted, not the best) for Leecode Online Judge(https://oj.leetcode.com/)
+Only about 200 solutions.
 
 src/LeetCode_round2
 
-第二遍刷leetcode的代码，结构相比于第一遍更加清楚
+Second Round Leetcode
 
 src/Company
 
